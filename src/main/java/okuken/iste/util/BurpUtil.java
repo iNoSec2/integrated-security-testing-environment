@@ -161,7 +161,7 @@ public class BurpUtil {
 		}
 		if(component instanceof JTable) {
 			var table = (JTable)component;
-			if("proxyHistoryTable".equals(table.getName()) && table.getColumnCount() > 15) {
+			if("proxyHttpHistoryTable".equals(table.getName()) && table.getColumnCount() > 15) {
 				ret.add(table);
 				return;
 			}
