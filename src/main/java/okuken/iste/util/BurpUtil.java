@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 import javax.swing.table.TableModel;
 import javax.swing.text.JTextComponent;
 
@@ -64,11 +65,13 @@ public class BurpUtil {
 
 	public static void highlightTab(Component suiteTabUiComponent) {
 		JTabbedPane parentTabbedPane = (JTabbedPane)suiteTabUiComponent.getParent();
-		parentTabbedPane.setBackgroundAt(indexOf(suiteTabUiComponent, parentTabbedPane), Colors.CHARACTER_HIGHLIGHT);
+		parentTabbedPane.setForegroundAt(indexOf(suiteTabUiComponent, parentTabbedPane), Colors.CHARACTER_HIGHLIGHT);
 		new Timer().schedule(new TimerTask() {
 			@Override
 			public void run() {
-				parentTabbedPane.setBackgroundAt(indexOf(suiteTabUiComponent, parentTabbedPane), getDefaultForegroundColor());
+				SwingUtilities.invokeLater(() -> {
+					parentTabbedPane.setForegroundAt(indexOf(suiteTabUiComponent, parentTabbedPane), getDefaultForegroundColor());
+				});
 			}
 		}, 5000);
 	}
